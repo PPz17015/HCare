@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Custom overrides for Chakra UI classes - Desktop only */
+@media (min-width: 1024px) {
+  .css-1riv37w {
+    width: 1800px !important;
+  }
+  
+  .css-vdb91x {
+    width: 100vw !important;
+    margin: 0 !important;
+    padding-right: 500px;;
+  }
+  
+}

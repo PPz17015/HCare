@@ -2,14 +2,19 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react';
 
-// Pages - sẽ tạo sau
+// Pages
+import LandingPage from './pages/LandingPage';
+import SpecialtiesPage from './pages/SpecialtiesPage';
+import SpecialtyDoctorsPage from './pages/SpecialtyDoctorsPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DashboardPage from './pages/patient/DashboardPage';
 import RoomDetailPage from './pages/patient/RoomDetailPage';
+import BookingFormPage from './pages/patient/BookingFormPage';
 import AdminPage from './pages/admin/AdminPage';
 
-// Layout components - sẽ tạo sau
+// Layout components
+import BookingCareLayout from './components/layout/BookingCareLayout';
 import AuthLayout from './components/layout/AuthLayout';
 import MainLayout from './components/layout/MainLayout';
 
@@ -31,6 +36,26 @@ function App() {
     <Box minH="100vh" bg="gray.50">
       <Router>
         <Routes>
+          {/* Landing Page */}
+          <Route path="/" element={
+            <BookingCareLayout>
+              <LandingPage />
+            </BookingCareLayout>
+          } />
+          
+          {/* Specialties Pages */}
+          <Route path="/chuyen-khoa" element={
+            <BookingCareLayout>
+              <SpecialtiesPage />
+            </BookingCareLayout>
+          } />
+          
+          <Route path="/chuyen-khoa/:specialtyId" element={
+            <BookingCareLayout>
+              <SpecialtyDoctorsPage />
+            </BookingCareLayout>
+          } />
+          
           {/* Public Routes - Authentication */}
           <Route path="/login" element={
             <PublicRoute>
@@ -65,6 +90,10 @@ function App() {
             </ProtectedRoute>
           } />
           
+          <Route path="/booking-form" element={
+            <BookingFormPage />
+          } />
+          
           {/* Protected Routes - Admin */}
           <Route path="/admin" element={
             <ProtectedRoute>
@@ -73,9 +102,6 @@ function App() {
               </MainLayout>
             </ProtectedRoute>
           } />
-          
-          {/* Default redirect */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
           
           {/* 404 - Not Found */}
           <Route path="*" element={
